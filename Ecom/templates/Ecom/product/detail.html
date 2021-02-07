@@ -1,0 +1,79 @@
+{% extends "Ecom/base.html" %}
+{% load static %}
+
+{% block title %}
+    {{ product.name }}
+{% endblock %}
+
+{% block content %}
+    <div class="container mb-5 ">
+      <div class="jumbotron bg-secondary mt-5 ">
+        <div class="row">
+            <div class=" col-md-6 pr-1">
+              <img src="{{ product.image.url }}" class="img-thumbnail img-fluid" alt="..." width="500" height="720">
+            </div>
+            <div class=" col-md-6 mt-4">
+              <h3 >
+                {{ product.name }}
+              </h3>
+              <span><a href="{{ product.category.get_absolute_url }}">Brand: {{ product.category }}</a></span>
+              <hr>
+              <h6>Rating: No Rating Available Yet</h6>
+              <br>
+              <h3>&#8358;{{ product.price }}</h3>
+              <br>
+              <a>
+                <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                  {{ cart_product_form }}
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-warning btn-lg btn-block">
+                    <img src="{% static 'images/cart.png'%}" alt="Add to cart image" width="75" height="75">
+                    <span class=" p-5">Add To Cart</span>
+                  </button>
+                </form>
+              </a>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="jumbotron bg-light">
+        <h5>PRODUCT DETAIL</h5>
+        <hr>
+        <br>
+        <div class="p-3 bg-secontext-dark">
+          <h6 class="">DESCRIPTION</h6>
+          <hr>
+          <P>
+            {{ product.description }}
+          </P>
+        </div>
+        <br>
+          <div class="row">
+            <div class="col-sm-6 border">
+              <h6 class="mt-2">SPECIFICATIONS</h6>
+              <hr>
+              <ul>
+                <li>serviced home</li>
+                <li>swimming pool</li>
+                <li>spaceouse Rooms</li>
+                <li>Four Bedrooms</li>
+                <li>private appartment</li>
+              </ul>
+            </div>
+
+            <br>
+            <div class="col-sm-6 border">
+              <h6 class="mt-2">KEY FEATURES</h6>
+              <hr>
+              <ul>
+                <li>Large Room sizes</li>
+                <li>All Rooms with Master Size Toilets</li>
+                <li>Serviced Appartments</li>
+              </ul>
+            </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

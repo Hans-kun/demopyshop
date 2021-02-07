@@ -1,0 +1,63 @@
+{% extends "Ecom/base.html" %}
+{% load static %}
+
+{% block title %}
+    Your cart
+{% endblock %}
+
+{% block content %}
+<div class="my-2 shadow">
+    <a href="{% url 'Ecom:product_list' %}" class="btn btn-outline-dark m-2"><i class="fas fa-arrow-left"></i>  Continue Shopping</a>
+
+    <div class="w-100">
+        <table class="table table-inverse w-100">
+            <thead class="thead-inverse thead-light">
+                <tr>
+                    <th>Image</th>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for item in cart %}
+                {% with product=item.product %}
+                    <tr>
+                        <td class="py-0" scope="row">
+                            <img src='{{ product.image.url }}' alt=" " width="100px " height="auto "></td>
+                        <td>{{ product.name }}</td>
+                        <td>&#8358;{{ item.price }}</td>
+                        <td>
+                            <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                                {{ item.update_quantity_form.quantity }}
+                                {{ item.update_quantity_form.update }}
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </form>
+                        </td>
+                        <td>&#8358;{{ item.total_price }}</td>
+                        <td><button class="btn btn-warning"><a href="{% url 'cart:cart_remove' product.id %}">Remove</a></button></td>
+                    </tr>
+                {% endwith %}
+            {% endfor %}
+
+                </tr>
+                <tr>
+                    <td scope="row"><strong>Items/Total</strong></td>
+                    <td></td>
+                    <td></td>
+                    <td><strong>{{ cart.get_total_quantity }}</strong></td>
+                    <td><strong>&#8358;{{ cart.get_total_price }}</strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-right m-2">
+        <a name="" id="" class="btn m-2 btn-success" href="{% url 'orders:order_create' %}" role="button">Checkout
+                <i class="fas fa-arrow-right"></i>
+            </a>
+    </div>
+</div>
+{% endblock content %}

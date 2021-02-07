@@ -1,0 +1,24 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Verify Your E-mail Address" %}{% endblock %}
+
+{% block content %}
+
+
+<div class="row d-flex justify-content-center ">
+    <div class="col-sm-4 shadow p-4 mt-5">
+        <div class="caption text-center">
+            <h2 id="thumbnail-label">{% trans "Verify Your E-mail Address" %}</h2>
+            <!-- <div class="thumbnail-description smaller">{% trans 'Are you sure you want to sign out?' %}</div> -->
+        </div>
+        <div class="caption card-footer text-center">
+            <p class="ml-2 mr-2">{% blocktrans %}We have sent an e-mail to you for verification. Follow the link
+                provided to finalize the signup process. Please contact us if you do not receive it within a few
+                minutes.{% endblocktrans %}</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

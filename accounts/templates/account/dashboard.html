@@ -1,0 +1,27 @@
+{% extends "Ecom/base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <div class="jumbotron">
+    <h1>{{request.user.first_name}} {{ request.user.last_name }}</h1>
+    <p>Welcome to your dashboard </p>
+    </div>
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+            <div class="col-md-4 ">
+                <img src="{{ request.user.profile.image_thumbnail.url }}" alt="...">
+            </div>
+            <div class="col-md-8 pr-3">
+                <div class="card-body">
+                    <h5 class="card-title">username: {{ request.user}}</h5>
+                    <p class="card-text">email: {{ request.user.email}}</p>
+                    <p class="card-text"><a href="{% url 'edit' %}">Edit Profile</a></p>
+                    <p class="card-text"><a href="{% url 'account_change_password' %}">change Password</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
